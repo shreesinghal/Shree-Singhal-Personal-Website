@@ -47,6 +47,22 @@ export default function Contact() {
           </li>
         </ul>
       </div>
+
+      <div className="border-t border-rule">
+        <div className="mx-auto flex max-w-page flex-col gap-2 px-6 py-6 text-sm text-ink-muted md:flex-row md:items-center md:justify-between md:px-8">
+          <p className="font-serif">
+            {site.name} {new Date().getFullYear()}
+          </p>
+          <a
+            href={site.sourceRepo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-serif transition-colors hover:text-accent"
+          >
+            View source code on GitHub →
+          </a>
+        </div>
+      </div>
     </footer>
   );
 }

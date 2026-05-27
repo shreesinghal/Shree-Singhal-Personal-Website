@@ -1,5 +1,5 @@
 export const site = {
-  name: 'Shree Singhal',
+  name: 'Shree Singhal Engineering Portfolio',
 
   // Each entry renders as its own paragraph on the home page.
   tagline: [
@@ -17,6 +17,8 @@ export const site = {
     linkedin: 'https://www.linkedin.com/in/shree-singhal/',
   },
 
+  sourceRepo: 'https://github.com/shreesinghal/shreesinghal.github.io',
+
   contact: {
     heading: 'Contact',
     blurb:
@@ -28,7 +30,6 @@ export const site = {
     title: 'Shree Singhal — Portfolio',
     description:
       'Personal portfolio of Shree Singhal, B.S. Computer Engineering & Computer Science at Northeastern University, working on embedded systems, low-level software, AI, and HPC.',
-    // TODO: replace with the deployed site URL once it is known
-    url: 'https://example.com',
+    url: 'https://shreesinghal.github.io',
   },
 };
