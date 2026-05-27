@@ -1,32 +1,208 @@
+export type ProjectSection = {
+  heading: string;
+  body: string;
+};
+
+export type ProjectPhoto = {
+  // Path under /public when provided (e.g., 'projects/renu/cover.jpg').
+  // When omitted, the detail page renders a captioned placeholder tile.
+  src?: string;
+  alt: string;
+  caption?: string;
+};
+
 export type Project = {
+  // Stable slug — used as the URL segment for the detail page at /projects/<id>/.
+  id: string;
   title: string;
   description: string;
   tags: string[];
   codeUrl: string;
   liveUrl: string;
+  // Optional override for the second link's label (e.g. 'Paper', 'Spotlight Article').
+  // Defaults to 'Live' when omitted.
+  liveLabel?: string;
+  // Path under /public with a leading slash, e.g. '/projects/renu.jpg'.
+  // The leading slash matters: detail pages live at /projects/<id>/, and a
+  // bare 'projects/renu.jpg' would resolve relative to that URL and 404.
+  // If omitted (or the file is missing), ProjectCard falls back to a
+  // captioned placeholder tile.
+  image?: string;
+  imageAlt?: string;
+  // Detail-page content — rendered by app/projects/[id]/page.tsx.
+  summary?: string;
+  sections?: ProjectSection[];
+  photos?: ProjectPhoto[];
+  // Path under /public with a leading slash, e.g. '/projects/paper.pdf'.
+  // When set, the detail page renders an embedded PDF viewer and the
+  // project card shows a "Paper" link alongside Code / Live.
+  paperPdf?: string;
+  // Optional override for the paper link label (defaults to 'Paper').
+  paperLabel?: string;
 };
 
-// TODO: replace with real projects
 export const projects: Project[] = [
   {
-    title: 'Project One',
-    description: 'Short description of the project goes here.',
-    tags: ['Tag A', 'Tag B', 'Tag C'],
+    id: 'renu',
+    title: 'ReNU - Collegiate Wind Turbine Software + Electrical Lead',
+    description:
+      'Led a 6-person team, designing the full power and control stack: 3-phase full-wave rectifier, MPPT load control, and a closed-loop PID pitch control system driven by tachometer feedback. Regulated rotor speed across 5–15 mph wind. Placed 4th of 32 teams at the DOE Collegiate Wind Turbine Competition 2026.',
+    tags: ['Embedded', 'PID Control', 'MPPT', 'Power Electronics', 'Team Lead'],
     codeUrl: '#',
     liveUrl: '#',
+    image: '/projects/renu.jpg',
+    imageAlt: 'ReNU wind turbine at competition.',
+    summary:
+      'ReNU was Northeastern’s entry into the U.S. Department of Energy Collegiate Wind Turbine Competition. As Software + Electrical Lead I owned the full power and control stack — rectification, MPPT load control, and closed-loop pitch control — and led a 6-person team to a 4th-place finish out of 32 schools.',
+    sections: [
+      {
+        heading: 'What I worked on',
+        body:
+          'I designed the 3-phase full-wave rectifier that conditioned the generator output, the MPPT controller that continuously tuned the resistive load to maximize harvested power, and a closed-loop PID pitch control system driven by tachometer feedback that regulated rotor speed cleanly across the 5–15 mph operating window. I owned firmware, control tuning, and integration with the mechanical team.',
+      },
+      {
+        heading: 'What I learned',
+        body:
+          'Tuning a real PID loop in front of a wind tunnel is very different from simulating one. The biggest lessons were about disturbance rejection, sensor noise, and how much of a control system’s reliability comes from the boring parts — clean wiring, debounced signals, and conservative gains that don’t fight the mechanics.',
+      },
+    ],
+    photos: [],
   },
   {
-    title: 'Project Two',
-    description: 'Short description of the project goes here.',
-    tags: ['Tag A', 'Tag B'],
+    id: 'backscatter',
+    title: 'Ambient Backscatter Wireless Communication',
+    description:
+      'PEAK Award-funded independent research on a backscatter system that modulates ambient Wi-Fi signals for passive data transmission. Designed RF filtration, a custom encoding/decoding protocol, and a custom antenna. Mentored by Dr. Stefano Basagni and featured in the NU COE Spotlight.',
+    tags: ['RF', 'Wireless', 'Antenna Design', 'Research'],
     codeUrl: '#',
     liveUrl: '#',
+    image: '/projects/backscatter.jpg',
+    imageAlt: 'Ambient backscatter prototype board and antenna.',
+    paperPdf:
+      '/projects/AmbientSense-Ambient_Backscatter_Comm_for_Air_Quality_Sensing-ShreeSinghal.pdf',
+    paperLabel: 'Paper',
+    summary:
+      'Independent research, funded by the Northeastern PEAK Award and mentored by Dr. Stefano Basagni, exploring whether ambient Wi-Fi signals can be re-modulated to transmit data without an active radio. The work was featured in the Northeastern College of Engineering Spotlight.',
+    sections: [
+      {
+        heading: 'What I worked on',
+        body:
+          'I designed the RF filtration front-end, a custom antenna geometry for the 2.4 GHz band, and a lightweight encoding/decoding protocol so a receiver could recover bits from the reflected signal. The system runs without an active transmitter on the tag side — power comes from harvested ambient energy.',
+      },
+      {
+        heading: 'What I learned',
+        body:
+          'Backscatter forces you to confront how noisy the real RF environment is. I came away with much sharper instincts for analog front-end design, signal integrity, and the gap between “works on the bench” and “works near a microwave.”',
+      },
+    ],
+    photos: [],
   },
   {
-    title: 'Project Three',
-    description: 'Short description of the project goes here.',
-    tags: ['Tag A', 'Tag B', 'Tag C', 'Tag D'],
+    id: 'drone-laser',
+    title: 'Drone Tracking In-Air Laser Charging — Capstone',
+    description:
+      'Three-layer computer vision pipeline combining GroundingDINO bounding boxes, segmentation masks, and CoTracker3 point tracking to keep focus on an onboard photodiode target. Drives a closed-loop PID turret actuation system that aligns laser placement with live tracking coordinates.',
+    tags: ['Computer Vision', 'GroundingDINO', 'CoTracker3', 'PID', 'Capstone'],
     codeUrl: '#',
     liveUrl: '#',
+    image: '/projects/drone-laser.jpg',
+    imageAlt: 'Drone tracking + laser turret capstone rig.',
+    summary:
+      'My senior capstone: a vision-guided turret that tracks a drone in flight and keeps a laser pointed at an onboard photodiode for wireless power transfer. The system fuses three CV models with a closed-loop PID actuator to maintain alignment in real time.',
+    sections: [
+      {
+        heading: 'What I worked on',
+        body:
+          'I built a three-layer CV pipeline: GroundingDINO produces bounding boxes from natural-language prompts, a segmentation pass refines the drone silhouette, and CoTracker3 maintains stable point-level tracking on the photodiode itself. The tracking coordinates feed a PID controller driving two-axis turret actuation, so the laser stays on-target even as the drone moves.',
+      },
+      {
+        heading: 'What I learned',
+        body:
+          'Real-time CV is a latency problem first and a model-quality problem second. Most of the engineering effort went into shrinking the pipeline so the turret loop ran fast enough to be useful, and into deciding which layer of the stack should be the authoritative source of position at each moment.',
+      },
+    ],
+    photos: [],
+  },
+  {
+    id: 'mitosis',
+    title: 'Project Mitosis — 3D-Printed Delta 3D Printer',
+    description:
+      'NURobotics project building a delta 3D printer from scratch. Designed and software-tested a CadLab PCB that interfaces an STM32 with stepper motor drivers, and wrote C++ firmware that synchronizes three steppers to execute parallel kinematic motion.',
+    tags: ['STM32', 'C++ Firmware', 'PCB Design', 'Robotics'],
+    codeUrl: '#',
+    liveUrl: '#',
+    image: '/projects/mitosis.jpg',
+    imageAlt: 'Project Mitosis delta 3D printer build.',
+    summary:
+      'A from-scratch delta 3D printer built with Northeastern’s robotics club. I owned the electronics and firmware — a CadLab-designed PCB driving three stepper motors, and the C++ firmware that turns coordinates into synchronized parallel-kinematic motion.',
+    sections: [
+      {
+        heading: 'What I worked on',
+        body:
+          'I designed and software-validated the PCB that interfaces an STM32 with the stepper drivers, then wrote the firmware that solves the delta inverse kinematics and synchronizes the three steppers so the effector follows a clean Cartesian path. Calibration and homing routines were part of the firmware as well.',
+      },
+      {
+        heading: 'What I learned',
+        body:
+          'Parallel kinematics are unforgiving — a small error in one arm shows up as a tilted, distorted print. Getting it right was a useful lesson in how much firmware-level precision (timing, step counting, acceleration profiles) matters when the mechanics can’t cover for you.',
+      },
+    ],
+    photos: [],
+  },
+  {
+    id: 'market-making',
+    title: 'DQN vs Q-Learning Market Making Agent',
+    description:
+      'Designed and trained two RL agents — tabular Q-Learning and Double DQN — to act as market makers in a custom trading environment with inventory, volatility, and time-remaining as state variables. Engineered a reward function balancing profit against inventory risk over a 25-action bid/ask offset space. DQN delivered ~4× higher profit (680.71 vs 169.77) at ~20× the compute cost, quantifying the tabular-vs-deep-RL tradeoff.',
+    tags: ['Reinforcement Learning', 'DQN', 'Python', 'Quant'],
+    codeUrl: '#',
+    liveUrl: '#',
+    image: '/projects/market-making.jpg',
+    imageAlt: 'DQN vs tabular Q-learning training curves.',
+    summary:
+      'A head-to-head comparison of tabular Q-Learning and Double DQN as market-making agents inside a custom trading environment. The goal was to measure — concretely — what the move from tabular RL to deep RL actually buys you, and at what compute cost.',
+    sections: [
+      {
+        heading: 'What I worked on',
+        body:
+          'I built the trading environment from scratch — state space (inventory, volatility, time remaining), a 25-action bid/ask offset space, and a reward function that traded raw profit against inventory risk. Then I trained both agents on identical episodes and instrumented the training loop to capture profit, inventory excursions, and wall-clock cost.',
+      },
+      {
+        heading: 'Results',
+        body:
+          'Double DQN delivered roughly 4× the profit of the tabular agent (680.71 vs 169.77 in the evaluation regime) but cost about 20× more compute to train. The interesting finding wasn’t that DQN wins — it was the shape of the tradeoff, and how much of the tabular agent’s gap came from poor coverage of the inventory dimension.',
+      },
+    ],
+    photos: [],
+  },
+  {
+    id: 'embedded-systems',
+    title: 'Embedded Design — FUSE FS & RISC-V Datapath',
+    description:
+      'Two systems-level projects: a Unix-style FUSE file system in C++ with block-storage architecture, nested directories, bitmap resource tracking, and file I/O syscall handling; and a full CPU datapath implemented in SystemVerilog/Verilog using both RISC-V and MIPS instruction sets.',
+    tags: ['C++', 'SystemVerilog', 'RISC-V', 'MIPS', 'Operating Systems'],
+    codeUrl: '#',
+    liveUrl: '#',
+    image: 'projects/riscv.jpg',
+    imageAlt: 'RISC-V datapath waveform / FUSE filesystem layout.',
+    summary:
+      'Two systems-level projects from my embedded design coursework: a Unix-style FUSE file system in C++ and a complete CPU datapath in SystemVerilog supporting both RISC-V and MIPS instruction sets.',
+    sections: [
+      {
+        heading: 'FUSE file system',
+        body:
+          'A user-space file system written in C++ with a block-storage backend, nested directories, bitmap-tracked resource allocation, and handlers for the standard file I/O syscalls (open, read, write, mkdir, unlink, etc.). The goal was to internalize how a real FS lays out blocks and metadata, not just how to call into one.',
+      },
+      {
+        heading: 'RISC-V / MIPS datapath',
+        body:
+          'A full single-cycle CPU datapath in SystemVerilog/Verilog — register file, ALU, control unit, memory interface — capable of executing both the RISC-V and MIPS instruction sets. Each ISA forced different control-signal decisions and made the contrast between the two architectures concrete in a way reading a textbook does not.',
+      },
+    ],
+    photos: [],
   },
 ];
+
+export function getProjectById(id: string): Project | undefined {
+  return projects.find((p) => p.id === id);
+}

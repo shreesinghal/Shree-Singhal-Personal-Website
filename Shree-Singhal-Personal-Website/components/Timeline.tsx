@@ -62,11 +62,11 @@ export default function Timeline() {
 
   return (
     <section
-      id="timeline"
       aria-labelledby="timeline-heading"
-      className="scroll-mt-0 py-40 md:py-0"
+      className="py-0 md:py-40"
     >
       <div className="mx-auto max-w-page px-6 md:px-8">
+        <div id="timeline" className="scroll-mt-20" />
         <SectionHeading
           id="timeline-heading"
           eyebrow="★★★"

@@ -1,19 +1,48 @@
+'use client';
+
+import Link from 'next/link';
+import { useState } from 'react';
 import type { Project } from '@/content/projects';
 
 export default function ProjectCard({ project }: { project: Project }) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const showImage = Boolean(project.image) && !imageFailed;
+  const detailHref = `/projects/${project.id}/`;
+
   return (
-    <article className="group flex flex-col overflow-hidden rounded-lg border border-rule bg-bg transition-colors hover:border-accent/40">
-      <div
-        aria-hidden="true"
-        className="relative aspect-[4/3] w-full overflow-hidden bg-accent-soft/70"
+    <article className="group relative flex flex-col overflow-hidden rounded-lg border border-rule bg-bg transition-colors hover:border-accent/40">
+      <Link
+        href={detailHref}
+        aria-label={`${project.title} — view project details`}
+        className="absolute inset-0 z-10"
       >
-        <div className="absolute inset-0 flex items-center justify-center px-4 text-center font-serif text-base italic text-ink-muted">
-          {project.title}
-        </div>
+        <span className="sr-only">View project details</span>
+      </Link>
+
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-accent-soft/70">
+        {showImage ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={project.image}
+            alt={project.imageAlt ?? project.title}
+            onError={() => setImageFailed(true)}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+            loading="lazy"
+          />
+        ) : (
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 flex items-center justify-center px-4 text-center font-serif text-base italic text-ink-muted"
+          >
+            {project.title}
+          </div>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-5 md:p-6">
-        <h3 className="font-serif text-xl font-medium text-ink">{project.title}</h3>
+        <h3 className="font-serif text-xl font-medium text-ink transition-colors group-hover:text-accent">
+          {project.title}
+        </h3>
         <p className="mt-2 text-sm leading-relaxed text-ink-muted">{project.description}</p>
 
         <ul className="mt-4 flex flex-wrap gap-2">
@@ -27,23 +56,48 @@ export default function ProjectCard({ project }: { project: Project }) {
           ))}
         </ul>
 
-        <div className="mt-5 flex items-center gap-5 border-t border-rule/60 pt-4 text-sm font-medium">
-          <a
-            href={project.codeUrl}
-            aria-label={`${project.title} — source code`}
-            className="text-ink hover:text-accent"
+        <div className="mt-5 flex items-center justify-between gap-5 border-t border-rule/60 pt-4 text-sm font-medium">
+          <div className="flex items-center gap-5">
+            <a
+              href={project.codeUrl}
+              aria-label={`${project.title} — source code`}
+              className="relative z-20 text-ink hover:text-accent"
+              onClick={(e) => e.stopPropagation()}
+            >
+              Code
+              <span aria-hidden="true" className="ml-1">↗</span>
+            </a>
+            <a
+              href={project.liveUrl}
+              aria-label={`${project.title} — ${project.liveLabel ?? 'live demo'}`}
+              className="relative z-20 text-ink hover:text-accent"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {project.liveLabel ?? 'Live'}
+              <span aria-hidden="true" className="ml-1">↗</span>
+            </a>
+            {project.paperPdf && (
+              <a
+                href={project.paperPdf}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={`${project.title} — open paper (PDF) in a new tab`}
+                className="relative z-20 text-ink hover:text-accent"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {project.paperLabel ?? 'Paper'}
+                <span aria-hidden="true" className="ml-1">↗</span>
+              </a>
+            )}
+          </div>
+
+          <span
+            aria-hidden="true"
+            className="inline-flex items-center gap-1 text-ink-muted transition-colors group-hover:text-accent"
           >
-            Code
-            <span aria-hidden="true" className="ml-1">↗</span>
-          </a>
-          <a
-            href={project.liveUrl}
-            aria-label={`${project.title} — live demo`}
-            className="text-ink hover:text-accent"
-          >
-            Live
-            <span aria-hidden="true" className="ml-1">↗</span>
-          </a>
+            Details
+            <span className="transition-transform group-hover:translate-x-0.5">→</span>
+          </span>
         </div>
       </div>
     </article>

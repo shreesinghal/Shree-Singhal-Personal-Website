@@ -3,24 +3,36 @@ export type SkillGroup = {
   skills: string[];
 };
 
-// TODO: replace with real skills.
-// Suggested defaults for a CE+CS / embedded / HPC / AI student are listed in
-// CLAUDE_CODE_PROMPT.md for reference.
 export const skills: SkillGroup[] = [
   {
     title: 'Languages',
-    skills: ['Skill A', 'Skill B', 'Skill C', 'Skill D'],
+    skills: ['C++', 'Python', 'Java', 'SystemVerilog', 'Verilog', 'MATLAB', 'Kotlin', 'Racket'],
   },
   {
-    title: 'Systems',
-    skills: ['Skill A', 'Skill B', 'Skill C', 'Skill D'],
+    title: 'Embedded & Hardware',
+    skills: [
+      'RISC-V Design',
+      'STM32CubeIDE',
+      'Arduino',
+      'KiCAD',
+      'Altium',
+      'LT SPICE',
+      'Xilinx',
+      'Quartus Prime Lite',
+    ],
   },
   {
-    title: 'ML / AI',
-    skills: ['Skill A', 'Skill B', 'Skill C', 'Skill D'],
+    title: 'HPC & Systems',
+    skills: ['Slurm', 'CUDA', 'Linux / WSL', 'Git', 'Bootstrapping & Sensitivity Analysis'],
   },
   {
-    title: 'Tools',
-    skills: ['Skill A', 'Skill B', 'Skill C', 'Skill D'],
+    title: 'Methods & ML',
+    skills: [
+      'Reinforcement Learning (DQN / Q-Learning)',
+      'Computer Vision (GroundingDINO, CoTracker3)',
+      'PID Control',
+      'Object-Oriented Design',
+      'Agile / SCRUM',
+    ],
   },
 ];

@@ -12,8 +12,6 @@ export function generateStaticParams(): Params[] {
   return experience.map((e) => ({ id: e.id }));
 }
 
-export const dynamicParams = false;
-
 export function generateMetadata({ params }: { params: Params }): Metadata {
   const entry = getExperienceById(params.id);
   if (!entry) return { title: site.meta.title };
