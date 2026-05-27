@@ -1,5 +1,5 @@
 export const site = {
-  name: 'Shree Singhal Engineering Portfolio',
+  name: 'Shree Singhal',
 
   // Each entry renders as its own paragraph on the home page.
   tagline: [
