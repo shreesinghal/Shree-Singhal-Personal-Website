@@ -77,7 +77,7 @@ export const projects: Project[] = [
     image: '/projects/backscatter.jpg',
     imageAlt: 'Ambient backscatter prototype board and antenna.',
     paperPdf:
-      '/projects/AmbientSense-Ambient_Backscatter_Comm_for_Air_Quality_Sensing-ShreeSinghal.pdf',
+      '/projects/AmbientSense_Backscatter_Paper.pdf',
     paperLabel: 'Paper',
     summary:
       'Independent research, funded by the Northeastern PEAK Award and mentored by Dr. Stefano Basagni, exploring whether ambient Wi-Fi signals can be re-modulated to transmit data without an active radio. The work was featured in the Northeastern College of Engineering Spotlight.',
@@ -169,7 +169,7 @@ export const projects: Project[] = [
   },
   {
     id: 'hpc-fft',
-    title: 'Literature Review: Progression of the Use of High-Performance Computing for FFTs',
+    title: 'Literature Review: Literature_Review_on_FFT_in_HPC',
     description:
       'Surveyed and synthesized 12 research papers spanning 2005–2025 to trace ' +
       'how Fast Fourier Transform implementations have evolved alongside HPC hardware.',
