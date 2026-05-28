@@ -97,14 +97,14 @@ export const projects: Project[] = [
   },
   {
     id: 'drone-laser',
-    title: 'Drone Tracking In-Air Laser Charging — Capstone',
+    title: 'Drone Tracking In-Air Laser Charging Capstone',
     description:
       'Three-layer computer vision pipeline combining GroundingDINO bounding boxes, segmentation masks, and CoTracker3 point tracking to keep focus on an onboard photodiode target. Drives a closed-loop PID turret actuation system that aligns laser placement with live tracking coordinates.',
     tags: ['Computer Vision', 'GroundingDINO', 'CoTracker3', 'PID', 'Capstone'],
     image: '/projects/drone-laser.jpg',
     imageAlt: 'Drone tracking + laser turret capstone rig.',
     summary:
-      'My senior capstone: a vision-guided turret that tracks a drone in flight and keeps a laser pointed at an onboard photodiode for wireless power transfer. The system fuses three CV models with a closed-loop PID actuator to maintain alignment in real time.',
+      'A vision-guided turret that tracks a drone in flight and keeps a laser pointed at an onboard photodiode for wireless power transfer. The system fuses three CV models with a closed-loop PID actuator to maintain alignment in real time.',
     sections: [
       {
         heading: 'What I worked on',
@@ -187,7 +187,7 @@ export const projects: Project[] = [
       'from a single compile-time setting to independently tunable parameters at the ' +
       'compute, communication, and accumulation layers.',
     paperPdf:
-      '/projects/Progression_of_the_Use_of_High-Performance_Computing_for_FFTs-ShreeSinghal.pdf',
+      '/projects/Literature_Review_on_FFT_in_HPC.pdf',
     paperLabel: 'Paper',
     sections: []
 
@@ -198,7 +198,7 @@ export const projects: Project[] = [
     description:
       'Two systems-level projects: a Unix-style FUSE file system in C++ with block-storage architecture, nested directories, bitmap resource tracking, and file I/O syscall handling; and a full CPU datapath implemented in SystemVerilog/Verilog using both RISC-V and MIPS instruction sets.',
     tags: ['C++', 'SystemVerilog', 'RISC-V', 'MIPS', 'Operating Systems'],
-    image: 'projects/riscv.jpg',
+    image: '/projects/riscv.jpg',
     imageAlt: 'RISC-V datapath waveform / FUSE filesystem layout.',
     summary:
       'Two systems-level projects from my embedded design coursework: a Unix-style FUSE file system in C++ and a complete CPU datapath in SystemVerilog supporting both RISC-V and MIPS instruction sets.',
