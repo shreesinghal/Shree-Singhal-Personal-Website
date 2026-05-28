@@ -17,8 +17,10 @@ export type Project = {
   title: string;
   description: string;
   tags: string[];
-  codeUrl: string;
-  liveUrl: string;
+  // External links — omit (or leave undefined) to hide the corresponding link on
+  // the project card and detail page.
+  codeUrl?: string;
+  liveUrl?: string;
   // Optional override for the second link's label (e.g. 'Paper', 'Spotlight Article').
   // Defaults to 'Live' when omitted.
   liveLabel?: string;
@@ -48,12 +50,10 @@ export const projects: Project[] = [
     description:
       'Led a 6-person team, designing the full power and control stack: 3-phase full-wave rectifier, MPPT load control, and a closed-loop PID pitch control system driven by tachometer feedback. Regulated rotor speed across 5–15 mph wind. Placed 4th of 32 teams at the DOE Collegiate Wind Turbine Competition 2026.',
     tags: ['Embedded', 'PID Control', 'MPPT', 'Power Electronics', 'Team Lead'],
-    codeUrl: '#',
-    liveUrl: '#',
     image: '/projects/renu.jpg',
     imageAlt: 'ReNU wind turbine at competition.',
     summary:
-      'ReNU was Northeastern’s entry into the U.S. Department of Energy Collegiate Wind Turbine Competition. As Software + Electrical Lead I owned the full power and control stack — rectification, MPPT load control, and closed-loop pitch control — and led a 6-person team to a 4th-place finish out of 32 schools.',
+      'ReNU is Northeastern’s Sustainable Energy Club. In 2026, it competed in the U.S. Department of Energy Collegiate Wind Turbine Competition. As Software + Electrical Lead I owned the full power and control stack — rectification, MPPT load control, and closed-loop pitch control — and led a 6-person team to a 4th-place finish out of 32 schools.',
     sections: [
       {
         heading: 'What I worked on',
@@ -74,8 +74,6 @@ export const projects: Project[] = [
     description:
       'PEAK Award-funded independent research on a backscatter system that modulates ambient Wi-Fi signals for passive data transmission. Designed RF filtration, a custom encoding/decoding protocol, and a custom antenna. Mentored by Dr. Stefano Basagni and featured in the NU COE Spotlight.',
     tags: ['RF', 'Wireless', 'Antenna Design', 'Research'],
-    codeUrl: '#',
-    liveUrl: '#',
     image: '/projects/backscatter.jpg',
     imageAlt: 'Ambient backscatter prototype board and antenna.',
     paperPdf:
@@ -103,8 +101,6 @@ export const projects: Project[] = [
     description:
       'Three-layer computer vision pipeline combining GroundingDINO bounding boxes, segmentation masks, and CoTracker3 point tracking to keep focus on an onboard photodiode target. Drives a closed-loop PID turret actuation system that aligns laser placement with live tracking coordinates.',
     tags: ['Computer Vision', 'GroundingDINO', 'CoTracker3', 'PID', 'Capstone'],
-    codeUrl: '#',
-    liveUrl: '#',
     image: '/projects/drone-laser.jpg',
     imageAlt: 'Drone tracking + laser turret capstone rig.',
     summary:
@@ -129,8 +125,6 @@ export const projects: Project[] = [
     description:
       'NURobotics project building a delta 3D printer from scratch. Designed and software-tested a CadLab PCB that interfaces an STM32 with stepper motor drivers, and wrote C++ firmware that synchronizes three steppers to execute parallel kinematic motion.',
     tags: ['STM32', 'C++ Firmware', 'PCB Design', 'Robotics'],
-    codeUrl: '#',
-    liveUrl: '#',
     image: '/projects/mitosis.jpg',
     imageAlt: 'Project Mitosis delta 3D printer build.',
     summary:
@@ -153,10 +147,8 @@ export const projects: Project[] = [
     id: 'market-making',
     title: 'DQN vs Q-Learning Market Making Agent',
     description:
-      'Designed and trained two RL agents — tabular Q-Learning and Double DQN — to act as market makers in a custom trading environment with inventory, volatility, and time-remaining as state variables. Engineered a reward function balancing profit against inventory risk over a 25-action bid/ask offset space. DQN delivered ~4× higher profit (680.71 vs 169.77) at ~20× the compute cost, quantifying the tabular-vs-deep-RL tradeoff.',
+      'Designed and trained two RL agents (tabular Q-Learning and Double DQN) to act as market makers in a custom trading environment. Engineered a reward function balancing profit against inventory risk over a 25-action bid/ask offset space. DQN delivered ~4× higher profit (680.71 vs 169.77) at ~20× the compute cost, quantifying the tabular-vs-deep-RL tradeoff.',
     tags: ['Reinforcement Learning', 'DQN', 'Python', 'Quant'],
-    codeUrl: '#',
-    liveUrl: '#',
     image: '/projects/market-making.jpg',
     imageAlt: 'DQN vs tabular Q-learning training curves.',
     summary:
@@ -176,13 +168,36 @@ export const projects: Project[] = [
     photos: [],
   },
   {
+    id: 'hpc-fft',
+    title: 'Literature Review: Progression of the Use of High-Performance Computing for FFTs',
+    description:
+      'Surveyed and synthesized 12 research papers spanning 2005–2025 to trace ' +
+      'how Fast Fourier Transform implementations have evolved alongside HPC hardware.',
+    tags: ['HPC', 'FFT', 'Literature Review', 'Research'],
+    image: '/projects/HPC-FFT.jpg',
+    imageAlt: 'Literature review on high-performance computing for FFTs.',
+    summary: 
+      'This paper covers two decades of FFT optimization across HPC hardware, including CPU cache ' +
+      'autotuning, GPU shared-memory optimization, distributed multi-node scaling, Tensor ' +
+      'Core reformulations, and mixed-precision communication compression. Key findings ' +
+      'include that GPU acceleration shifts the FFT bottleneck from an arithmetic/computational issue ' +
+      'to interconnect latency being dominant cost (97% of runtime on Summit). Additionally, ' +
+      'slab decomposition was revived as the correct choice for dense GPU systems after a ' +
+      'decade of pencil-decomposition dominance, and that numerical precision has evolved ' +
+      'from a single compile-time setting to independently tunable parameters at the ' +
+      'compute, communication, and accumulation layers.',
+    paperPdf:
+      '/projects/Progression_of_the_Use_of_High-Performance_Computing_for_FFTs-ShreeSinghal.pdf',
+    paperLabel: 'Paper',
+    sections: []
+
+  },
+  {
     id: 'embedded-systems',
     title: 'Embedded Design — FUSE FS & RISC-V Datapath',
     description:
       'Two systems-level projects: a Unix-style FUSE file system in C++ with block-storage architecture, nested directories, bitmap resource tracking, and file I/O syscall handling; and a full CPU datapath implemented in SystemVerilog/Verilog using both RISC-V and MIPS instruction sets.',
     tags: ['C++', 'SystemVerilog', 'RISC-V', 'MIPS', 'Operating Systems'],
-    codeUrl: '#',
-    liveUrl: '#',
     image: 'projects/riscv.jpg',
     imageAlt: 'RISC-V datapath waveform / FUSE filesystem layout.',
     summary:

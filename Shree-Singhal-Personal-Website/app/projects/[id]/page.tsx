@@ -30,6 +30,9 @@ export default function ProjectDetailPage({ params }: { params: Params }) {
   const hasExternalCode = project.codeUrl && project.codeUrl !== '#';
   const hasExternalLive = project.liveUrl && project.liveUrl !== '#';
   const hasPaper = Boolean(project.paperPdf);
+  const hasBodyContent = Boolean(
+    project.summary || (project.sections && project.sections.length > 0),
+  );
 
   return (
     <>
@@ -108,19 +111,6 @@ export default function ProjectDetailPage({ params }: { params: Params }) {
             </header>
           </Reveal>
 
-          {project.image && (
-            <Reveal>
-              <figure className="mt-10 overflow-hidden rounded-lg ring-1 ring-rule">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={project.image}
-                  alt={project.imageAlt ?? project.title}
-                  className="aspect-[16/9] w-full object-cover"
-                />
-              </figure>
-            </Reveal>
-          )}
-
           {project.summary && (
             <Reveal>
               <p className="mt-10 font-serif text-lg leading-relaxed text-ink md:text-xl">
@@ -129,19 +119,21 @@ export default function ProjectDetailPage({ params }: { params: Params }) {
             </Reveal>
           )}
 
-          <Reveal>
-            <section className="mt-10" aria-labelledby="proj-overview">
-              <h2
-                id="proj-overview"
-                className="font-serif text-xl font-medium text-ink md:text-2xl"
-              >
-                Overview
-              </h2>
-              <p className="mt-3 font-serif text-[1.05rem] leading-relaxed text-ink">
-                {project.description}
-              </p>
-            </section>
-          </Reveal>
+          {hasBodyContent && (
+            <Reveal>
+              <section className="mt-10" aria-labelledby="proj-overview">
+                <h2
+                  id="proj-overview"
+                  className="font-serif text-xl font-medium text-ink md:text-2xl"
+                >
+                  Overview
+                </h2>
+                <p className="mt-3 font-serif text-[1.05rem] leading-relaxed text-ink">
+                  {project.description}
+                </p>
+              </section>
+            </Reveal>
+          )}
 
           {project.sections?.map((s, i) => (
             <Reveal key={i}>

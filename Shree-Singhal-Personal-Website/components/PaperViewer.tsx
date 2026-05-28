@@ -16,7 +16,7 @@ export default function PaperViewer({
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <section className="mt-12" aria-labelledby="paper-viewer-heading">
+    <section className="mx-auto mt-12 max-w-4xl" aria-labelledby="paper-viewer-heading">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <h2
           id="paper-viewer-heading"
@@ -61,7 +61,7 @@ export default function PaperViewer({
 
       <div
         className="mt-4 overflow-hidden rounded-lg bg-accent-soft/30 ring-1 ring-rule transition-[height] duration-300 ease-out"
-        style={{ height: expanded ? '90vh' : '70vh' }}
+        style={{ height: expanded ? '150vh' : '100vh' }}
       >
         <iframe
           src={`${src}#view=FitH&toolbar=1&navpanes=0`}

@@ -59,7 +59,7 @@ export default function Contact() {
             rel="noopener noreferrer"
             className="font-serif transition-colors hover:text-accent"
           >
-            View source code on GitHub →
+            View website source code on GitHub →
           </a>
         </div>
       </div>

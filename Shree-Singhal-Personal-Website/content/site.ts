@@ -5,7 +5,7 @@ export const site = {
   tagline: [
     'I am drawn to all things Computer and Software Engineering, especially embedded systems, ' +
     'algorithm design, high-performance computing, and artificial intelligence. ',
-    'My experience spans closed-loop embedded control systems, hardware-in-the-loop testing, ' +
+    'My experience spans closed-loop embedded control systems, hardware-in-the-loop development, ' +
     'HPC development, RISC-V/MIPS processor design, and reinforcement learning.',
     '\n🎓 B.S. Computer Engineering and Computer Science, Northeastern University 2026',
   ],
@@ -27,7 +27,7 @@ export const site = {
   },
 
   meta: {
-    title: 'Shree Singhal — Portfolio',
+    title: 'Shree Singhal Portfolio',
     description:
       'Personal portfolio of Shree Singhal, B.S. Computer Engineering & Computer Science at Northeastern University, working on embedded systems, low-level software, AI, and HPC.',
     url: 'https://shreesinghal.github.io',

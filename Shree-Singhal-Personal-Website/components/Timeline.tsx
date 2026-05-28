@@ -35,13 +35,14 @@ function assignLanes(entries: TimelineEntry[]): { placed: Placed[]; laneCount: n
 function positionFor(entry: TimelineEntry, span: number) {
   const top = ((entry.start - TIMELINE_RANGE.start) / span) * 100;
   const rawHeight = ((entry.end - entry.start) / span) * 100;
-  const height = Math.max(rawHeight, 6); // min visual height for single-year entries
+  // Single-year entries need enough room for label + date without overflow.
+  const height = Math.max(rawHeight, 14);
   return { top, height };
 }
 
 function BarContent({ entry }: { entry: TimelineEntry }) {
   return (
-    <div className="flex h-full w-full flex-col justify-between gap-1 rounded-md border-l-[3px] border-accent bg-accent-soft/80 px-3 py-2 text-left transition-colors group-hover:bg-accent-soft">
+    <div className="flex h-full w-full flex-col justify-center gap-1 overflow-hidden rounded-md border-l-[3px] border-accent bg-accent-soft/80 px-3 py-2 text-left transition-colors group-hover:bg-accent-soft">
       <span className="font-serif text-[0.95rem] font-medium leading-snug text-ink">
         {entry.label}
       </span>

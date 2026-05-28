@@ -8,6 +8,8 @@ export default function ProjectCard({ project }: { project: Project }) {
   const [imageFailed, setImageFailed] = useState(false);
   const showImage = Boolean(project.image) && !imageFailed;
   const detailHref = `/projects/${project.id}/`;
+  const hasCode = Boolean(project.codeUrl && project.codeUrl !== '#');
+  const hasLive = Boolean(project.liveUrl && project.liveUrl !== '#');
 
   return (
     <article className="group relative flex flex-col overflow-hidden rounded-lg border border-rule bg-bg transition-colors hover:border-accent/40">
@@ -43,7 +45,9 @@ export default function ProjectCard({ project }: { project: Project }) {
         <h3 className="font-serif text-xl font-medium text-ink transition-colors group-hover:text-accent">
           {project.title}
         </h3>
-        <p className="mt-2 text-sm leading-relaxed text-ink-muted">{project.description}</p>
+        <p className="mt-2 line-clamp-[8] text-sm leading-relaxed text-ink-muted">
+          {project.description}
+        </p>
 
         <ul className="mt-4 flex flex-wrap gap-2">
           {project.tags.map((tag) => (
@@ -58,24 +62,28 @@ export default function ProjectCard({ project }: { project: Project }) {
 
         <div className="mt-5 flex items-center justify-between gap-5 border-t border-rule/60 pt-4 text-sm font-medium">
           <div className="flex items-center gap-5">
-            <a
-              href={project.codeUrl}
-              aria-label={`${project.title} — source code`}
-              className="relative z-20 text-ink hover:text-accent"
-              onClick={(e) => e.stopPropagation()}
-            >
-              Code
-              <span aria-hidden="true" className="ml-1">↗</span>
-            </a>
-            <a
-              href={project.liveUrl}
-              aria-label={`${project.title} — ${project.liveLabel ?? 'live demo'}`}
-              className="relative z-20 text-ink hover:text-accent"
-              onClick={(e) => e.stopPropagation()}
-            >
-              {project.liveLabel ?? 'Live'}
-              <span aria-hidden="true" className="ml-1">↗</span>
-            </a>
+            {hasCode && (
+              <a
+                href={project.codeUrl}
+                aria-label={`${project.title} — source code`}
+                className="relative z-20 text-ink hover:text-accent"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Code
+                <span aria-hidden="true" className="ml-1">↗</span>
+              </a>
+            )}
+            {hasLive && (
+              <a
+                href={project.liveUrl}
+                aria-label={`${project.title} — ${project.liveLabel ?? 'live demo'}`}
+                className="relative z-20 text-ink hover:text-accent"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {project.liveLabel ?? 'Live'}
+                <span aria-hidden="true" className="ml-1">↗</span>
+              </a>
+            )}
             {project.paperPdf && (
               <a
                 href={project.paperPdf}
